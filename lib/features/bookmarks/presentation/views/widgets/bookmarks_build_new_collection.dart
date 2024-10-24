@@ -30,7 +30,7 @@ class BookmarksBuildNewCollection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Spacer(), // تضيف مسافة أعلى النصوص لتوجيهها لأسفل
+                const Spacer(),
                 Text(
                   AppStrings.addNewCollection,
                   style: getMediumStyle(

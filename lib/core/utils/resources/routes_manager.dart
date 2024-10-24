@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qurankareem/features/Reminder/presentation/views/reminder_view.dart';
 import 'package:qurankareem/features/main/presentation/views/main_view.dart';
@@ -7,6 +8,7 @@ import 'package:qurankareem/features/surah_details/presentation/views/surah_deta
 
 import '../../../features/bookmarks/presentation/views/bookmarks_view.dart';
 import '../../../features/home/presentation/views/home_view.dart';
+import '../../../features/main/presentation/manger/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import '../../../features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
@@ -26,7 +28,10 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kMainView,
-        builder: (context, state) => const MainView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => BottomNavigationBarCubit(),
+          child: const MainView(),
+        ),
       ),
       GoRoute(
         path: kHomeView,

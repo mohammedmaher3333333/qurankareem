@@ -3,14 +3,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qurankareem/core/utils/resources/assets_manager.dart';
 import 'package:qurankareem/core/utils/resources/color_manager.dart';
 import 'package:qurankareem/core/utils/resources/font_manager.dart';
-import 'package:qurankareem/core/utils/resources/strings_manager.dart';
 import 'package:qurankareem/core/utils/resources/styles_manager.dart';
+import 'package:qurankareem/features/home/data/models/quran_model/quran_model.dart';
 
 import '../../../../../core/utils/resources/values_manager.dart';
 
 class SurahListItem extends StatelessWidget {
-  const SurahListItem({super.key, required this.index});
-
+  const SurahListItem({super.key, required this.index, required this.surah});
+final Surah surah;
   final int index;
 
   @override
@@ -30,7 +30,8 @@ class SurahListItem extends StatelessWidget {
         ],
       ),
       title: Text(
-        AppStrings.suraName,
+        // AppStrings.suraName,
+        'surah.name',
         style: getMediumStyle(
           color: ColorManager.darkPurple,
           fontSize: FontSize.s16,
