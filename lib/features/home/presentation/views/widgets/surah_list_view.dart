@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qurankareem/core/utils/resources/strings_manager.dart';
 import 'package:qurankareem/core/widgets/custom_error_widget.dart';
 import 'package:qurankareem/core/widgets/custom_loading_indicator.dart';
 import 'package:qurankareem/features/home/presentation/manger/fetch_quran_cubit/fetch_quran_cubit.dart';
@@ -22,7 +23,7 @@ class SurahListView extends StatelessWidget {
         } else if (state is FetchQuranSuccess) {
           final surahs = state.surah;
           if (surahs.isEmpty) {
-            return const Center(child: Text('No Surahs available'));
+            return const Center(child: Text(AppStrings.noSurahAvailable));
           }
           return Expanded(
             child: ListView.builder(

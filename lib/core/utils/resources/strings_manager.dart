@@ -6,6 +6,7 @@ class AppStrings {
   static const String getStarted = 'Get Started';
   static const String asslamualaikum = 'Asslamualaikum';
   static const String tanvirAhassan = 'Tanvir Ahassan';
+  static const String noSurahAvailable = 'No Surahs available';
   static const String lastRead = 'Last Read';
   static const String theOpening = 'The Opening';
   static const String verses = 'verses';

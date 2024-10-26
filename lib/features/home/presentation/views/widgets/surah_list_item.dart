@@ -31,7 +31,7 @@ class SurahListItem extends StatelessWidget {
         ],
       ),
       title: Text(
-        'englishName',
+        surah.englishName,
         style: getMediumStyle(
           color: ColorManager.darkPurple,
           fontSize: FontSize.s14,
