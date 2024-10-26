@@ -16,6 +16,7 @@ class ImageAssets {
   static const String smallBook = '$imagePath/smallBook.svg';
   static const String menu3line = '$imagePath/menu3line.svg';
   static const String arrowBack = '$imagePath/arrow_back.svg';
+  static const String stopMusic = '$imagePath/stop-music.svg';
   static const String menu2line = '$imagePath/menu-2-line.svg';
   static const String folderPlus = '$imagePath/folder-plus.svg';
   static const String searchLine = '$imagePath/search-line.svg';

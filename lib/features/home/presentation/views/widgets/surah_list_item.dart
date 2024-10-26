@@ -3,15 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qurankareem/core/utils/resources/assets_manager.dart';
 import 'package:qurankareem/core/utils/resources/color_manager.dart';
 import 'package:qurankareem/core/utils/resources/font_manager.dart';
+import 'package:qurankareem/core/utils/resources/strings_manager.dart';
 import 'package:qurankareem/core/utils/resources/styles_manager.dart';
 import 'package:qurankareem/features/home/data/models/quran_model/quran_model.dart';
 
 import '../../../../../core/utils/resources/values_manager.dart';
 
 class SurahListItem extends StatelessWidget {
-  const SurahListItem({super.key, required this.index, required this.surah});
-final Surah surah;
-  final int index;
+  const SurahListItem({super.key, required this.surah});
+
+  final Surah surah;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ final Surah surah;
         children: [
           SvgPicture.asset(ImageAssets.aya),
           Text(
-            '${index + 1}',
+            '${surah.number}',
             style: getMediumStyle(
               color: ColorManager.darkPurple,
               fontSize: FontSize.s14,
@@ -30,47 +31,46 @@ final Surah surah;
         ],
       ),
       title: Text(
-        // AppStrings.suraName,
-        'surah.name',
+        'englishName',
         style: getMediumStyle(
           color: ColorManager.darkPurple,
-          fontSize: FontSize.s16,
+          fontSize: FontSize.s14,
         ),
       ),
       subtitle: RichText(
         text: TextSpan(
           style: getMediumStyle(
             color: ColorManager.bluishGray,
-            fontSize: FontSize.s12,
+            fontSize: FontSize.s10,
           ),
           children: [
-            const TextSpan(
-              text: 'Meccan',
+            TextSpan(
+              text: surah.revelationType,
             ),
             WidgetSpan(
               child: Container(
                 margin: const EdgeInsets.symmetric(
                   vertical: AppMargin.m5,
-                  horizontal: AppMargin.m5,
+                  horizontal: AppMargin.m2,
                 ),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: ColorManager.lightGrayishBlue,
                 ),
-                width: 4,
-                height: 4,
+                width: AppSize.s3,
+                height: AppSize.s3,
               ),
             ),
-            const TextSpan(text: '7 verses'),
+            TextSpan(text: '${surah.ayahs.length} ${AppStrings.verses}'),
           ],
         ),
       ),
       trailing: Text(
-        'الفاتحه',
+        surah.name,
         style: getBoldStyle(
           color: ColorManager.brightPurple,
           font: FontConstants.fontAmiri,
-          fontSize: FontSize.s20,
+          fontSize: FontSize.s18,
         ),
       ),
     );

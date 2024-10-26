@@ -55,8 +55,7 @@ class CustomContainerImage extends StatelessWidget {
                 const SizedBox(
                   height: AppSize.s20,
                 ),
-                Text(
-                  AppStrings.suraName,
+                Text('suraName',
                   style: getSemiBoldStyle(
                     color: ColorManager.white,
                     fontSize: FontSize.s18,

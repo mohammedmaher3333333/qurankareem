@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:qurankareem/core/utils/resources/font_manager.dart';
+import 'package:qurankareem/core/utils/resources/strings_manager.dart';
 import 'package:qurankareem/core/utils/resources/styles_manager.dart';
 import 'package:qurankareem/core/utils/resources/values_manager.dart';
+import 'package:qurankareem/features/home/data/models/quran_model/quran_model.dart';
 
 import '../../../../../core/utils/resources/assets_manager.dart';
 import '../../../../../core/utils/resources/color_manager.dart';
 
 class CustomTopContainer extends StatelessWidget {
-  const CustomTopContainer({super.key});
+  const CustomTopContainer({super.key, required this.surah});
+
+  final Surah surah;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class CustomTopContainer extends StatelessWidget {
           height: AppSize.s265,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(AppSize.s20),
             gradient: const LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
@@ -33,7 +37,7 @@ class CustomTopContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Al-Fatiah',
+                surah.name,
                 style: getMediumStyle(
                     color: ColorManager.white, fontSize: FontSize.s26),
               ),
@@ -41,14 +45,14 @@ class CustomTopContainer extends StatelessWidget {
                 height: AppSize.s4,
               ),
               Text(
-                'The Opening',
+                AppStrings.theOpening,
                 style: getMediumStyle(
                     color: ColorManager.white, fontSize: FontSize.s16),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(
                     vertical: AppMargin.m16, horizontal: AppMargin.m64),
-                height: 2,
+                height: AppSize.s2,
                 color: ColorManager.whiteOpacity,
               ),
               RichText(
@@ -58,24 +62,25 @@ class CustomTopContainer extends StatelessWidget {
                     fontSize: FontSize.s14,
                   ),
                   children: [
-                    const TextSpan(
-                      text: 'Meccan',
+                    TextSpan(
+                      text: surah.revelationType,
                     ),
                     WidgetSpan(
                       child: Container(
                         margin: const EdgeInsets.symmetric(
-                          vertical: AppMargin.m5,
+                          vertical: AppMargin.m8,
                           horizontal: AppMargin.m5,
                         ),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: ColorManager.lightGrayishBlue,
                         ),
-                        width: 4,
-                        height: 4,
+                        width: AppSize.s4,
+                        height: AppSize.s4,
                       ),
                     ),
-                    const TextSpan(text: '7 verses'),
+                    TextSpan(
+                        text: '${surah.ayahs.length} ${AppStrings.verses}'),
                   ],
                 ),
               ),

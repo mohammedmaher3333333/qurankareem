@@ -20,11 +20,10 @@ class SurahListView extends StatelessWidget {
         } else if (state is FetchQuranFailure) {
           return CustomErrorWidget(errMessage: state.errMessage);
         } else if (state is FetchQuranSuccess) {
-          final surahs = state.quran;
+          final surahs = state.surah;
           if (surahs.isEmpty) {
-            return Center(child: Text('No Surahs available'));
+            return const Center(child: Text('No Surahs available'));
           }
-          print('Fetched Surahs: ${surahs.length}');
           return Expanded(
             child: ListView.builder(
               itemCount: surahs.length,
@@ -39,7 +38,6 @@ class SurahListView extends StatelessWidget {
                   },
                   child: SurahListItem(
                     surah: surah,
-                    index: index,
                   ),
                 );
               },

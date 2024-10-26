@@ -57,22 +57,6 @@ abstract class AppRouter {
         path: kSurahDetailsView,
         builder: (context, state) => const SurahDetailsView(),
       ),
-      // GoRoute(
-      //   path: kBookDetailsView,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => SimilarBooksCubit(getIt.get<HomeRepoImpl>()),
-      //     child: BookDetailsView(
-      //       bookModel: state.extra as BookModel,
-      //     ),
-      //   ),
-      // ),
-      // GoRoute(
-      //   path: kSearchView,
-      //   builder: (context, state) => BlocProvider(
-      //     create: (context) => SearchCubit(getIt.get<SearchRepoImpl>())..fetchSearchBooks(),
-      //     child: const SearchView(),
-      //   ),
-      // ),
     ],
   );
 }

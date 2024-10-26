@@ -3,7 +3,6 @@ import 'package:qurankareem/features/surah_details/presentation/views/widgets/su
 
 class SurahDetailsView extends StatelessWidget {
   const SurahDetailsView({super.key});
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

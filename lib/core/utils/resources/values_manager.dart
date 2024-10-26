@@ -1,4 +1,5 @@
 class AppMargin {
+  static const double m2 = 2.0;
   static const double m5 = 5.0;
   static const double m7 = 7.0;
   static const double m8 = 8.0;

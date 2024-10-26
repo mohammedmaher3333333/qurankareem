@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qurankareem/core/utils/resources/assets_manager.dart';
 import 'package:qurankareem/core/utils/resources/color_manager.dart';
 import 'package:qurankareem/core/utils/resources/font_manager.dart';
 import 'package:qurankareem/core/utils/resources/styles_manager.dart';
 import 'package:qurankareem/core/utils/resources/values_manager.dart';
+import 'package:qurankareem/features/surah_details/presentation/manger/quran_player_cubit/quran_player_cubit.dart';
+
+import '../../../../home/data/models/quran_model/quran_model.dart';
 
 class CustomAyahActions extends StatelessWidget {
-  const CustomAyahActions({super.key});
+  const CustomAyahActions({super.key, required this.ayah});
+
+  final Ayah ayah;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,7 @@ class CustomAyahActions extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                '1',
+                '${ayah.numberInSurah}',
                 style: getMediumStyle(
                   color: ColorManager.white,
                   fontSize: FontSize.s14,
@@ -45,7 +51,22 @@ class CustomAyahActions extends StatelessWidget {
           const Spacer(),
           SvgPicture.asset(ImageAssets.share),
           const SizedBox(width: AppSize.s16),
-          SvgPicture.asset(ImageAssets.path),
+          BlocBuilder<QuranPlayerCubit, QuranPlayerState>(
+            builder: (context, state) {
+              final isPlaying = context.read<QuranPlayerCubit>().isPlaying;
+
+              return GestureDetector(
+                onTap: () {
+                  context.read<QuranPlayerCubit>().updateTrack('${ayah.audio}');
+                  context.read<QuranPlayerCubit>().togglePlayPause();
+                },
+                child: SvgPicture.asset(
+                  isPlaying ? ImageAssets.stopMusic : ImageAssets.path,
+                  width: 30,
+                ),
+              );
+            },
+          ),
           const SizedBox(width: AppSize.s16),
           SvgPicture.asset(ImageAssets.favorite),
         ],

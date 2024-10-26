@@ -1,95 +1,78 @@
-// class QuranModel {
-//   int code;
-//   String status;
-//   Data? data;
-//
-//   QuranModel({
-//     this.code = 0,
-//     this.status = '',
-//     this.data,
-//   });
-//
-//   factory QuranModel.fromJson(Map<String, dynamic> json) {
-//     return QuranModel(
-//       code: json['code'] ?? 0,
-//       status: json['status'] ?? '',
-//       data: json['data'] != null ? Data.fromJson(json['data']) : null,
-//     );
-//   }
-// }
+class QuranModel {
+  List<Surah> surahs;
 
+  QuranModel({required this.surahs});
 
-class Ayah {
-  final int number;
-  final String audio;
-  final List<String> audioSecondary;
-  final String text;
-
-  Ayah({
-    required this.number,
-    required this.audio,
-    required this.audioSecondary,
-    required this.text,
-  });
-
-  factory Ayah.fromJson(Map<String, dynamic> json) {
-    return Ayah(
-      number: json['number'],
-      audio: json['audio'],
-      audioSecondary: List<String>.from(json['audioSecondary']),
-      text: json['text'],
+  factory QuranModel.fromJson(Map<String, dynamic> json) {
+    return QuranModel(
+      surahs: Data.fromJson(json['data']).surahs,
     );
   }
 }
 
 class Surah {
-  final int number;
-  final String name;
-  final String englishName;
-  final List<Ayah> ayahs;
+  int number;
+  String name;
+  String englishName;
+  String revelationType; // إضافة حقل revelationType
+  List<Ayah> ayahs;
 
   Surah({
     required this.number,
     required this.name,
     required this.englishName,
+    required this.revelationType, // تضمين في المعاملات
     required this.ayahs,
   });
 
   factory Surah.fromJson(Map<String, dynamic> json) {
-    var ayahsFromJson = json['ayahs'] as List;
-    List<Ayah> ayahsList = ayahsFromJson.map((i) => Ayah.fromJson(i)).toList();
-
+    var ayahList = json['ayahs'] as List;
+    List<Ayah> ayahs = ayahList.map((i) => Ayah.fromJson(i)).toList();
     return Surah(
       number: json['number'],
       name: json['name'],
-      englishName: json['englishName'],
-      ayahs: ayahsList,
+      englishName: json['englishName'], // إضافة حقل englishName
+      revelationType: json['revelationType'], // إضافة حقل revelationType
+      ayahs: ayahs,
     );
   }
 }
 
-class QuranModel {
-  final List<Surah> surahs;
+class Ayah {
+  int number;
+  int? numberInSurah; // الرقم داخل السورة
 
-  QuranModel({required this.surahs});
+  String text;
+  String? englishTranslation;
+  String? audio;
+  List<String>? audioSecondary; // يمكنك إضافة حقل audio و audioSecondary إذا كنت بحاجة لذلك
 
-  factory QuranModel.fromJson(Map<String, dynamic> json) {
-    var surahsFromJson = json['data']['surahs'] as List;
-    List<Surah> surahsList = surahsFromJson.map((i) => Surah.fromJson(i)).toList();
+  Ayah({
+    required this.number,
+    this.numberInSurah,
+    required this.text,
+    this.audio,
+    this.audioSecondary,
+  });
 
-    return QuranModel(surahs: surahsList);
+  factory Ayah.fromJson(Map<String, dynamic> json) {
+    return Ayah(
+      number: json['number'],
+      text: json['text'] ?? '', // استخدام سلسلة فارغة إذا لم يكن موجودًا
+      audio: json['audio'], // إضافة حقل audio
+      audioSecondary: List<String>.from(json['audioSecondary'] ?? []), // إضافة حقل audioSecondary
+    );
   }
 }
 
-
 class Data {
-  List<Surah> surahs; // Non-nullable list
+  List<Surah> surahs;
   Edition? edition;
 
   Data({
     List<Surah>? surahs,
     this.edition,
-  }) : surahs = surahs ?? []; // Default to empty list if null
+  }) : surahs = surahs ?? [];
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
@@ -100,7 +83,6 @@ class Data {
     );
   }
 }
-
 
 class Edition {
   String identifier;
@@ -130,80 +112,99 @@ class Edition {
     );
   }
 }
+
+
+// class QuranModel {
+//   List<Surah> surahs;
+//
+//   QuranModel({required this.surahs});
+//
+//   factory QuranModel.fromJson(Map<String, dynamic> json) {
+//     var surahList = json['data']['surahs'] as List; // تأكد من الوصول إلى الحقل الصحيح
+//     List<Surah> surahs = surahList.map((i) => Surah.fromJson(i)).toList();
+//     return QuranModel(surahs: surahs);
+//   }
+// }
 //
 // class Surah {
 //   int number;
 //   String name;
-//   String englishName;
-//   String englishNameTranslation;
-//   String revelationType;
-//   List<Ayah> ayahs; // Making this non-nullable
+//   List<Ayah> ayahs;
 //
-//   Surah({
-//     this.number = 0,
-//     this.name = '',
-//     this.englishName = '',
-//     this.englishNameTranslation = '',
-//     this.revelationType = '',
-//     List<Ayah>? ayahs,
-//   }) : ayahs = ayahs ?? []; // Default to empty list if null
+//   Surah({required this.number, required this.name, required this.ayahs});
 //
 //   factory Surah.fromJson(Map<String, dynamic> json) {
+//     var ayahList = json['ayahs'] as List;
+//     List<Ayah> ayahs = ayahList.map((i) => Ayah.fromJson(i)).toList();
 //     return Surah(
-//       number: json['number'] ?? 0,
-//       name: json['name'] ?? '',
-//       englishName: json['englishName'] ?? '',
-//       englishNameTranslation: json['englishNameTranslation'] ?? '',
-//       revelationType: json['revelationType'] ?? '',
-//       ayahs: json['ayahs'] != null
-//           ? List<Ayah>.from(json['ayahs'].map((x) => Ayah.fromJson(x)))
-//           : [],
+//       number: json['number'],
+//       name: json['name'],
+//       ayahs: ayahs,
 //     );
 //   }
 // }
 //
+//
 // class Ayah {
 //   int number;
-//   String audio;
-//   List<String> audioSecondary; // Making this non-nullable
 //   String text;
-//   int numberInSurah;
-//   int juz;
-//   int manzil;
-//   int page;
-//   int ruku;
-//   int hizbQuarter;
-//   bool sajda;
+//   String? englishTranslation;
 //
-//   Ayah({
-//     this.number = 0,
-//     this.audio = '',
-//     List<String>? audioSecondary,
-//     this.text = '',
-//     this.numberInSurah = 0,
-//     this.juz = 0,
-//     this.manzil = 0,
-//     this.page = 0,
-//     this.ruku = 0,
-//     this.hizbQuarter = 0,
-//     this.sajda = false,
-//   }) : audioSecondary = audioSecondary ?? []; // Default to empty list if null
+//   Ayah({required this.number, required this.text});
 //
 //   factory Ayah.fromJson(Map<String, dynamic> json) {
 //     return Ayah(
-//       number: json['number'] ?? 0,
-//       audio: json['audio'] ?? '',
-//       audioSecondary: json['audioSecondary'] != null
-//           ? List<String>.from(json['audioSecondary'])
+//       number: json['number'],
+//       text: json['text'],
+//     );
+//   }
+// }
+//
+// class Data {
+//   List<Surah> surahs;
+//   Edition? edition;
+//
+//   Data({
+//     List<Surah>? surahs,
+//     this.edition,
+//   }) : surahs = surahs ?? [];
+//
+//   factory Data.fromJson(Map<String, dynamic> json) {
+//     return Data(
+//       surahs: json['surahs'] != null
+//           ? List<Surah>.from(json['surahs'].map((x) => Surah.fromJson(x)))
 //           : [],
-//       text: json['text'] ?? '',
-//       numberInSurah: json['numberInSurah'] ?? 0,
-//       juz: json['juz'] ?? 0,
-//       manzil: json['manzil'] ?? 0,
-//       page: json['page'] ?? 0,
-//       ruku: json['ruku'] ?? 0,
-//       hizbQuarter: json['hizbQuarter'] ?? 0,
-//       sajda: json['sajda'] ?? false,
+//       edition: json['edition'] != null ? Edition.fromJson(json['edition']) : null,
+//     );
+//   }
+// }
+//
+//
+// class Edition {
+//   String identifier;
+//   String language;
+//   String name;
+//   String englishName;
+//   String format;
+//   String type;
+//
+//   Edition({
+//     this.identifier = '',
+//     this.language = '',
+//     this.name = '',
+//     this.englishName = '',
+//     this.format = '',
+//     this.type = '',
+//   });
+//
+//   factory Edition.fromJson(Map<String, dynamic> json) {
+//     return Edition(
+//       identifier: json['identifier'] ?? '',
+//       language: json['language'] ?? '',
+//       name: json['name'] ?? '',
+//       englishName: json['englishName'] ?? '',
+//       format: json['format'] ?? '',
+//       type: json['type'] ?? '',
 //     );
 //   }
 // }

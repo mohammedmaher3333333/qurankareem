@@ -7,7 +7,8 @@ class AppStrings {
   static const String asslamualaikum = 'Asslamualaikum';
   static const String tanvirAhassan = 'Tanvir Ahassan';
   static const String lastRead = 'Last Read';
-  static const String suraName = 'Al-Fatiah';
+  static const String theOpening = 'The Opening';
+  static const String verses = 'verses';
   static const String ayahNum = 'Ayah No: 1';
   static const String surah = 'Surah';
   static const String para = 'Para';

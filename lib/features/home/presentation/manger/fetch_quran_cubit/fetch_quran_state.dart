@@ -14,7 +14,7 @@ final class FetchQuranFailure extends FetchQuranState {
 }
 
 class FetchQuranSuccess extends FetchQuranState {
-  final List<Surah> quran;
+  final List<Surah> surah;
 
-  FetchQuranSuccess(this.quran);
+  FetchQuranSuccess(this.surah);
 }
