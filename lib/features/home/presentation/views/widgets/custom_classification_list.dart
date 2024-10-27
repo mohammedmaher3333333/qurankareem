@@ -13,8 +13,8 @@ class CustomClassificationList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(
+    return Padding(
+      padding: const EdgeInsets.symmetric(
         vertical: AppPadding.p24,
         horizontal: AppPadding.p12,
       ),
@@ -24,23 +24,41 @@ class CustomClassificationList extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: CustomContainer(
-                text: AppStrings.surah,
+              child: GestureDetector(
+                onTap: () {
+                  context
+                      .read<ClassificationListCubit>()
+                      .selectItem(AppStrings.surah);
+                },
+                child: const CustomContainer(text: AppStrings.surah),
               ),
             ),
             Expanded(
-              child: CustomContainer(
-                text: AppStrings.para,
+              child: GestureDetector(
+                onTap: () => context
+                    .read<ClassificationListCubit>()
+                    .selectItem(AppStrings.para),
+                child: const CustomContainer(text: AppStrings.para),
               ),
             ),
             Expanded(
-              child: CustomContainer(
-                text: AppStrings.page,
+              child: GestureDetector(
+                onTap: () {
+                  context
+                      .read<ClassificationListCubit>()
+                      .selectItem(AppStrings.page);
+                },
+                child: const CustomContainer(text: AppStrings.page),
               ),
             ),
             Expanded(
-              child: CustomContainer(
-                text: AppStrings.hijb,
+              child: GestureDetector(
+                onTap: () {
+                  context
+                      .read<ClassificationListCubit>()
+                      .selectItem(AppStrings.hijb);
+                },
+                child: const CustomContainer(text: AppStrings.hijb),
               ),
             ),
           ],
@@ -54,7 +72,10 @@ class CustomContainer extends StatelessWidget {
   const CustomContainer({
     super.key,
     required this.text,
+    this.onTap,
   });
+
+  final void Function()? onTap;
 
   final String text;
 
@@ -64,7 +85,6 @@ class CustomContainer extends StatelessWidget {
       builder: (context, selectedText) {
         final isColorDark = Theme.of(context).brightness == Brightness.dark;
         final isSelected = selectedText == text;
-
         return GestureDetector(
           onTap: () {
             context.read<ClassificationListCubit>().selectItem(text);
@@ -72,17 +92,20 @@ class CustomContainer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                text,
-                style: getSemiBoldStyle(
-                  fontSize: FontSize.s16,
-                  color: isSelected
-                      ? (isColorDark
-                          ? ColorManager.shadeOfPurple
-                          : ColorManager.shadeOfPurple)
-                      : (isColorDark
-                          ? ColorManager.shadeOfPurple
-                          : ColorManager.bluishGray),
+              GestureDetector(
+                onTap: onTap,
+                child: Text(
+                  text,
+                  style: getSemiBoldStyle(
+                    fontSize: FontSize.s16,
+                    color: isSelected
+                        ? (isColorDark
+                            ? ColorManager.shadeOfPurple
+                            : ColorManager.shadeOfPurple)
+                        : (isColorDark
+                            ? ColorManager.shadeOfPurple
+                            : ColorManager.bluishGray),
+                  ),
                 ),
               ),
               Container(

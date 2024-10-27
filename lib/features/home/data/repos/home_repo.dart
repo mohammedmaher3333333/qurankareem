@@ -5,5 +5,7 @@ import '../../../../core/errors/failures.dart';
 
 abstract class HomeRepo {
   Future<Either<Failure, List<Surah>>> fetchQuran();
+  Future<Either<Failure, List<Surah>>> filterQuranByClassification(String classification);
+
 }
 

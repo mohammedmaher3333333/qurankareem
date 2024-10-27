@@ -26,8 +26,6 @@ class HomeRepoImpl implements HomeRepo {
           final englishSurah = englishQuranData.surahs[i];
 
           for (int j = 0; j < arabicSurah.ayahs.length; j++) {
-            arabicSurah.ayahs[j].numberInSurah = j + 1;
-
             final englishText = englishSurah.ayahs[j].text;
             arabicSurah.ayahs[j].englishTranslation = englishText;
           }
@@ -44,6 +42,38 @@ class HomeRepoImpl implements HomeRepo {
         return Left(ServerFailure.fromDioException(e));
       }
       return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Surah>>> filterQuranByClassification(
+      String classification) async {
+    final result = await fetchQuran();
+    return result.fold(
+      (failure) => Left(failure),
+      (surahs) {
+        final filteredSurahs = _filterSurahs(classification, surahs);
+        return Right(filteredSurahs);
+      },
+    );
+  }
+
+  List<Surah> _filterSurahs(String classification, List<Surah> surahs) {
+    switch (classification) {
+      case 'Para':
+        return surahs
+            .where((surah) => surah.number <= 10)
+            .toList();
+      case 'Page':
+        return surahs
+            .where((surah) => surah.number % 5 == 0)
+            .toList();
+      case 'Hijb':
+        return surahs
+            .where((surah) => surah.revelationType == 'Meccan')
+            .toList();
+      default:
+        return surahs;
     }
   }
 }

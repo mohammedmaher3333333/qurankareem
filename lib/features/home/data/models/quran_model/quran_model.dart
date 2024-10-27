@@ -14,7 +14,7 @@ class Surah {
   int number;
   String name;
   String englishName;
-  String revelationType; // إضافة حقل revelationType
+  String revelationType;
   List<Ayah> ayahs;
 
   Surah({
@@ -40,15 +40,21 @@ class Surah {
 
 class Ayah {
   int number;
-  int? numberInSurah; // الرقم داخل السورة
+  int? numberInSurah;
+  int? juz;
+  int? page;
+  int? hizbQuarter;
 
   String text;
   String? englishTranslation;
   String? audio;
-  List<String>? audioSecondary; // يمكنك إضافة حقل audio و audioSecondary إذا كنت بحاجة لذلك
+  List<String>? audioSecondary;
 
   Ayah({
     required this.number,
+    required this.juz,
+    required this.page,
+    required this.hizbQuarter,
     this.numberInSurah,
     required this.text,
     this.audio,
@@ -58,6 +64,10 @@ class Ayah {
   factory Ayah.fromJson(Map<String, dynamic> json) {
     return Ayah(
       number: json['number'],
+      numberInSurah: json['numberInSurah'],
+      juz: json['juz'],
+      page: json['page'],
+      hizbQuarter: json['hizbQuarter'],
       text: json['text'] ?? '', // استخدام سلسلة فارغة إذا لم يكن موجودًا
       audio: json['audio'], // إضافة حقل audio
       audioSecondary: List<String>.from(json['audioSecondary'] ?? []), // إضافة حقل audioSecondary

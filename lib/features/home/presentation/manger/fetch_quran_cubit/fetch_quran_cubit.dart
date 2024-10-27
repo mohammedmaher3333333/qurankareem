@@ -18,4 +18,13 @@ class FetchQuranCubit extends Cubit<FetchQuranState> {
       (quran) => emit(FetchQuranSuccess(quran)),
     );
   }
+
+  Future<void> fetchQuranByClassification(String classification) async {
+    emit(FetchQuranLoading());
+    var result = await homeRepo.filterQuranByClassification(classification);
+    result.fold(
+      (failure) => emit(FetchQuranFailure(failure.errMessage)),
+      (quran) => emit(FetchQuranSuccess(quran)),
+    );
+  }
 }
