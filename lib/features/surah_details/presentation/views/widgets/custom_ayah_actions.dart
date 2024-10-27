@@ -7,6 +7,7 @@ import 'package:qurankareem/core/utils/resources/font_manager.dart';
 import 'package:qurankareem/core/utils/resources/styles_manager.dart';
 import 'package:qurankareem/core/utils/resources/values_manager.dart';
 import 'package:qurankareem/features/surah_details/presentation/manger/quran_player_cubit/quran_player_cubit.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../home/data/models/quran_model/quran_model.dart';
 
@@ -49,7 +50,15 @@ class CustomAyahActions extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          SvgPicture.asset(ImageAssets.share),
+          GestureDetector(
+            onTap: (){
+              Share.share('${ayah.text} {${ayah.numberInSurah}}');
+              print('object');
+            },
+            child: SvgPicture.asset(
+              ImageAssets.share,
+            ),
+          ),
           const SizedBox(width: AppSize.s16),
           BlocBuilder<QuranPlayerCubit, QuranPlayerState>(
             builder: (context, state) {
