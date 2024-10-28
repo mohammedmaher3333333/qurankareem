@@ -6,7 +6,9 @@ import 'package:qurankareem/features/repentance/presentation/views/repentance_vi
 import 'package:qurankareem/features/supplication/presentation/views/supplication_view.dart';
 import 'package:qurankareem/features/surah_details/presentation/views/surah_details_view.dart';
 
+import '../../../features/bookmarks/presentation/manger/build_bookmarks_collection_cubit/build_bookmarks_collection_cubit.dart';
 import '../../../features/bookmarks/presentation/views/bookmarks_view.dart';
+import '../../../features/bookmarks/presentation/views/collection_view.dart';
 import '../../../features/home/presentation/views/home_view.dart';
 import '../../../features/main/presentation/manger/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import '../../../features/splash/presentation/views/splash_view.dart';
@@ -19,6 +21,7 @@ abstract class AppRouter {
   static const kReminderView = '/reminderView';
   static const kRepentanceView = '/repentanceView';
   static const kSupplicationView = '/supplicationView';
+  static const kCollectionView = '/collectionView';
 
   static final router = GoRouter(
     routes: [
@@ -28,10 +31,11 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kMainView,
-        builder: (context, state) => BlocProvider(
-          create: (context) => BottomNavigationBarCubit(),
-          child: const MainView(),
-        ),
+        builder: (context, state) =>
+            BlocProvider(
+              create: (context) => BottomNavigationBarCubit(),
+              child: const MainView(),
+            ),
       ),
       GoRoute(
         path: kHomeView,
@@ -57,6 +61,18 @@ abstract class AppRouter {
         path: kSurahDetailsView,
         builder: (context, state) => const SurahDetailsView(),
       ),
+      GoRoute(
+        path: '${AppRouter.kCollectionView}/:collectionIndex',
+        builder: (context, state) {
+          final int collectionIndex = int.parse(
+              state.pathParameters['collectionIndex']!);
+          return BlocProvider(
+            create: (context) => BuildBookmarksCollectionCubit(),
+            child: CollectionView(collectionIndex: collectionIndex),
+          );
+        },
+      ),
+
     ],
   );
 }

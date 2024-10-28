@@ -9,6 +9,7 @@ import 'package:qurankareem/core/utils/resources/values_manager.dart';
 import 'package:qurankareem/features/surah_details/presentation/manger/quran_player_cubit/quran_player_cubit.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../../bookmarks/presentation/manger/build_bookmarks_collection_cubit/build_bookmarks_collection_cubit.dart';
 import '../../../../home/data/models/quran_model/quran_model.dart';
 
 class CustomAyahActions extends StatelessWidget {
@@ -51,7 +52,7 @@ class CustomAyahActions extends StatelessWidget {
           ),
           const Spacer(),
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Share.share('${ayah.text} {${ayah.numberInSurah}}');
               print('object');
             },
@@ -77,7 +78,23 @@ class CustomAyahActions extends StatelessWidget {
             },
           ),
           const SizedBox(width: AppSize.s16),
-          SvgPicture.asset(ImageAssets.favorite),
+          GestureDetector(
+            onTap: () {
+              final cubit = context.read<BuildBookmarksCollectionCubit>();
+
+              if (cubit.collections.isNotEmpty) {
+                cubit.addItemToCollection(0, ayah);
+                print('Added: ${ayah.text}');
+                print(
+                    'Collection Items: ${cubit.collections[0]['items']?.map((a) => a.text).toList()}');
+              } else {
+                print("No collections found to add the Ayah.");
+              }
+            },
+            child: SvgPicture.asset(
+              ImageAssets.favorite,
+            ),
+          ),
         ],
       ),
     );

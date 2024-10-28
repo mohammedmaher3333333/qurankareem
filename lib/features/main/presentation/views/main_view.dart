@@ -9,6 +9,7 @@ import 'package:qurankareem/features/supplication/presentation/views/supplicatio
 
 import '../../../../core/utils/resources/values_manager.dart';
 import '../../../../core/utils/service_locator.dart';
+import '../../../bookmarks/presentation/manger/build_bookmarks_collection_cubit/build_bookmarks_collection_cubit.dart';
 import '../../../home/data/repos/home_repo_impl.dart';
 import '../../../home/presentation/manger/fetch_quran_cubit/fetch_quran_cubit.dart';
 import '../../../home/presentation/views/home_view.dart';
@@ -36,9 +37,11 @@ class MainView extends StatelessWidget {
                         create: (context) => ClassificationListCubit(),
                       ),
                       BlocProvider(
-                        create: (context) => FetchQuranCubit(
+                        create: (context) =>
+                        FetchQuranCubit(
                           getIt.get<HomeRepoImpl>(),
-                        )..fetchQuran(),
+                        )
+                          ..fetchQuran(),
                       ),
                     ],
                     child: const HomeView(),
@@ -46,7 +49,10 @@ class MainView extends StatelessWidget {
                   const ReminderView(),
                   const RepentanceView(),
                   const SupplicationView(),
-                  const BookmarksView(),
+                  BlocProvider(
+                    create: (_) => BuildBookmarksCollectionCubit(),
+                    child: const BookmarksView(),
+                  ),
                 ],
               );
             },
