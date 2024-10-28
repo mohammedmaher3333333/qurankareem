@@ -63,7 +63,7 @@ class SplashViewBody extends StatelessWidget {
                       right: AppSize.s62,
                       child: GestureDetector(
                         onTap: () {
-                          GoRouter.of(context).push(AppRouter.kMainView);
+                          GoRouter.of(context).go(AppRouter.kMainView);
                         },
                         child: Container(
                           width: AppSize.s185,

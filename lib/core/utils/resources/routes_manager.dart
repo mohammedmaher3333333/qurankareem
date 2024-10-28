@@ -33,11 +33,10 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kMainView,
-        builder: (context, state) =>
-            BlocProvider(
-              create: (context) => BottomNavigationBarCubit(),
-              child: const MainView(),
-            ),
+        builder: (context, state) => BlocProvider(
+          create: (context) => BottomNavigationBarCubit(),
+          child: const MainView(),
+        ),
       ),
       GoRoute(
         path: kHomeView,
@@ -62,22 +61,23 @@ abstract class AppRouter {
       GoRoute(
         path: kSurahDetailsView,
         builder: (context, state) => const SurahDetailsView(),
-      ),GoRoute(
+      ),
+      GoRoute(
         path: kSurahDetailsViewSupplication,
         builder: (context, state) => const SurahDetailsViewSupplication(),
       ),
+
       GoRoute(
         path: '${AppRouter.kCollectionView}/:collectionIndex',
         builder: (context, state) {
-          final int collectionIndex = int.parse(
-              state.pathParameters['collectionIndex']!);
+          final int collectionIndex =
+              int.parse(state.pathParameters['collectionIndex']!);
           return BlocProvider(
             create: (context) => BuildBookmarksCollectionCubit(),
             child: CollectionView(collectionIndex: collectionIndex),
           );
         },
       ),
-
     ],
   );
 }
