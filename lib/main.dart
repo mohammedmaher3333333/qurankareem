@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qurankareem/core/utils/service_locator.dart';
 
 import 'core/utils/resources/routes_manager.dart';
+import 'features/home/data/repos/home_repo_impl.dart';
+import 'features/home/presentation/manger/fetch_quran_cubit/fetch_quran_cubit.dart';
 import 'features/main/presentation/manger/theme_cubit/theme_cubit.dart';
 
 void main() {
@@ -16,8 +18,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+        ),
+        BlocProvider(
+          create: (context) =>
+          FetchQuranCubit(
+            getIt.get<HomeRepoImpl>(),
+          )
+            ..fetchQuran(),
+        ),
+      ],
       child: BlocBuilder<ThemeCubit, ThemeData>(
         builder: (context, theme) {
           return MaterialApp.router(

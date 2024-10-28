@@ -8,10 +8,7 @@ import 'package:qurankareem/features/repentance/presentation/views/repentance_vi
 import 'package:qurankareem/features/supplication/presentation/views/supplication_view.dart';
 
 import '../../../../core/utils/resources/values_manager.dart';
-import '../../../../core/utils/service_locator.dart';
 import '../../../bookmarks/presentation/manger/build_bookmarks_collection_cubit/build_bookmarks_collection_cubit.dart';
-import '../../../home/data/repos/home_repo_impl.dart';
-import '../../../home/presentation/manger/fetch_quran_cubit/fetch_quran_cubit.dart';
 import '../../../home/presentation/views/home_view.dart';
 import '../manger/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 
@@ -35,13 +32,6 @@ class MainView extends StatelessWidget {
                     providers: [
                       BlocProvider(
                         create: (context) => ClassificationListCubit(),
-                      ),
-                      BlocProvider(
-                        create: (context) =>
-                        FetchQuranCubit(
-                          getIt.get<HomeRepoImpl>(),
-                        )
-                          ..fetchQuran(),
                       ),
                     ],
                     child: const HomeView(),

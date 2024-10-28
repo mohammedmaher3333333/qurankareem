@@ -12,12 +12,14 @@ import '../../../features/bookmarks/presentation/views/collection_view.dart';
 import '../../../features/home/presentation/views/home_view.dart';
 import '../../../features/main/presentation/manger/bottom_navigation_bar_cubit/bottom_navigation_bar_cubit.dart';
 import '../../../features/splash/presentation/views/splash_view.dart';
+import '../../../features/supplication/presentation/views/surah_details_view_supplication.dart';
 
 abstract class AppRouter {
   static const kMainView = '/mainView';
   static const kHomeView = '/homeView';
   static const kBookmarksView = '/bookmarksView';
   static const kSurahDetailsView = '/surahDetails';
+  static const kSurahDetailsViewSupplication = '/surahDetailsSupplication';
   static const kReminderView = '/reminderView';
   static const kRepentanceView = '/repentanceView';
   static const kSupplicationView = '/supplicationView';
@@ -60,6 +62,9 @@ abstract class AppRouter {
       GoRoute(
         path: kSurahDetailsView,
         builder: (context, state) => const SurahDetailsView(),
+      ),GoRoute(
+        path: kSurahDetailsViewSupplication,
+        builder: (context, state) => const SurahDetailsViewSupplication(),
       ),
       GoRoute(
         path: '${AppRouter.kCollectionView}/:collectionIndex',
