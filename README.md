@@ -4,10 +4,11 @@
 
 # Developed an app to assist users in listening to and memorizing the Holy Quran. Users can stream Quranic verses, mark favorite ayahs, and share them
 ### Tools
-•	Architecture: MVVM    
-•	 State Management: Bloc   
-•	 API Integration: Dio
-# Add some screenshots
+-	Architecture: MVVM    
+-	State Management: Bloc   
+-	API Integration: Dio
+### Add some screenshots
+
 
 ![splash](https://github.com/user-attachments/assets/7c13dc50-7a96-4ecc-a6f3-55f7638c6e96)
 
