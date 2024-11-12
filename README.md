@@ -1,21 +1,19 @@
-# qurankareem
-
-## Getting Started
+# Qurankareem
 
 # Developed an app to assist users in listening to and memorizing the Holy Quran. Users can stream Quranic verses, mark favorite ayahs, and share them
 ### Tools
 -	Architecture: MVVM    
 -	State Management: Bloc   
 -	API Integration: Dio
+
 ### Add some screenshots
 
+<img src="https://github.com/user-attachments/assets/16b7e2f8-85d8-4d07-9972-d03857f5ce26" alt="Screenshot 1" width="300" style="margin: 20px;">
 
-![splash](https://github.com/user-attachments/assets/7c13dc50-7a96-4ecc-a6f3-55f7638c6e96)
+<img src="https://github.com/user-attachments/assets/33f1981e-d35b-42fa-a2d6-864b1d656f98" alt="Screenshot 4" width="300" style="margin: 20px;">
 
-![quran kareem main screen](https://github.com/user-attachments/assets/c4a4cd0e-eda5-4e15-8987-bea4004696df)
+<img src="https://github.com/user-attachments/assets/7b22556d-d907-4154-934c-fe25a8d3f74a" alt="Screenshot 2" width="300" style="margin: 20px;">
 
-![surah details](https://github.com/user-attachments/assets/2f7943a7-0ab3-4b64-bee9-ddc2d623c462)
+<img src="https://github.com/user-attachments/assets/a4e003e6-dc70-4afa-9b54-2f685f12749d" alt="Screenshot 3" width="300" style="margin: 20px;">
 
-![surahs](https://github.com/user-attachments/assets/37301079-360a-4e72-8dd8-607266d9ee77)
-
-![read surah](https://github.com/user-attachments/assets/8d36b747-0311-4933-a338-bb5100289c9c)
+<img src="https://github.com/user-attachments/assets/9dd03a63-fa6b-4155-a6da-aecc8a10dd1a" alt="Screenshot 3" width="300" style="margin: 20px;">
